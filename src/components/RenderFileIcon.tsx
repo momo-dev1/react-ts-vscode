@@ -1,7 +1,9 @@
-interface IProps {}
+interface IProps {
+  name: string;
+}
 
 const RenderFileIcon = (props: IProps) => {
-  return <div></div>;
+  return <div>{props.name}</div>;
 };
 
 export default RenderFileIcon;
