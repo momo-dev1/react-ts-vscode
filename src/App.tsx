@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
-// import Preview from "./components/Preview";
 import RecursiveComponent from "./components/RecursiveComponent";
 import ResizablePanel from "./components/ResizablePanel";
 import WelcomeTab from "./components/WelcomeTab";
 import { fileTree } from "./data/fileTree";
+import Preview from "./components/Preview";
 
 const App = () => {
   const { openedFiles } = useSelector(({ tree }: RootState) => tree);
@@ -19,7 +19,7 @@ const App = () => {
               <RecursiveComponent fileTree={fileTree} />
             </div>
           }
-          rightPanel={openedFiles.length ? null : <WelcomeTab />}
+          rightPanel={openedFiles.length ? <Preview /> : <WelcomeTab />}
         />
       </div>
     </div>
