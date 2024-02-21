@@ -26,7 +26,32 @@ const OpenedFilesBarTab = ({ file }: IProps) => {
     const { id: activeTabId, name: filename, content: fileContent } = file;
     dispatch(setClickedFileAction({ filename, fileContent, activeTabId }));
   };
-  const onRemove = (selectedId: string) => {};
+  const onRemove = (selectedId: string) => {
+    const filterd = openedFiles.filter((file) => file.id !== selectedId);
+    const lastTap = filterd[filterd.length - 1];
+
+    if (!lastTap) {
+      dispatch(
+        setClickedFileAction({
+          filename: "",
+          activeTabId: null,
+          fileContent: "",
+        })
+      );
+      dispatch(setOpenedFilesAction([]));
+      return;
+    }
+    const { name, id, content } = lastTap;
+
+    dispatch(
+      setClickedFileAction({
+        filename: name,
+        activeTabId: id,
+        fileContent: content,
+      })
+    );
+    dispatch(setOpenedFilesAction(filterd));
+  };
 
   return (
     <div
